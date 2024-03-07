@@ -1,12 +1,15 @@
 package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.AuthenticatedUser;
+import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.ConsoleService;
+import com.techelevator.tenmo.services.TransferService;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 public class App {
@@ -104,7 +107,12 @@ public class App {
 	}
 
 	private void sendBucks() {
-		// TODO Auto-generated method stub
+        AccountService accountService = new AccountService(API_BASE_URL, currentUser);
+        consoleService.printTransferUsers();
+        AccountService.getUsers();
+//        List<User> userList = AccountService.getUsers();
+//        System.out.println("Which user would you like to send money to?");
+//        System.out.println(userList);
 		
 	}
 
