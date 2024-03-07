@@ -16,7 +16,7 @@ public class AccountService {
 
     private static String BASE_URL = "http://localhost:8080";
     private static final RestTemplate restTemplate = new RestTemplate();
-    private static AuthenticatedUser currentUser = null;
+    private static AuthenticatedUser currentUser;
 
 
     public AccountService(String BASE_URL, AuthenticatedUser currentUser) {
@@ -38,7 +38,7 @@ public class AccountService {
         for (User user : users) {
             if (user.getId() == currentUser.getUser().getId()) {
             } else
-                System.out.println(user.getId() + " " + user.getUsername());
+                System.out.println(user.getId() + " || " + user.getUsername());
         }
         return users;
     }

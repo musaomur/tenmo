@@ -93,7 +93,7 @@ public class ConsoleService {
         System.out.println("---Send TE Bucks---");
         System.out.println("--------------------");
         System.out.println("Users");
-        System.out.println("ID    Name");
+        System.out.println("ID   ||  Name");
         System.out.println("--------------------");
     }
 
