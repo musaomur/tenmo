@@ -5,5 +5,10 @@ import java.util.List;
 public interface TransferDao {
     List<String> getUserList();
 
+    void transferFunds();
+    //void transferFunds();
+
+
+
 
 }
