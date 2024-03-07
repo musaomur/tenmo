@@ -5,7 +5,7 @@ import com.techelevator.tenmo.model.UserCredentials;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
-
+import java.util.List;
 public class ConsoleService {
 
     private final Scanner scanner = new Scanner(System.in);
@@ -87,5 +87,16 @@ public class ConsoleService {
     public void printErrorMessage() {
         System.out.println("An error occurred. Check the log for details.");
     }
+
+    public void printTransferUsers() {
+        System.out.println("--------------------");
+        System.out.println("---Send TE Bucks---");
+        System.out.println("--------------------");
+        System.out.println("Users");
+        System.out.println("ID    Name");
+        System.out.println("--------------------");
+    }
+
+
 
 }
