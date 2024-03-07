@@ -2,6 +2,7 @@ package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.AccountDao;
 import com.techelevator.tenmo.dao.UserDao;
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.User;
 
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,11 @@ public class AccountController {
         List<User> users = userDao.getUsers();
         return users;
     }
+//    @RequestMapping(path = "/tenmo_user", method = RequestMethod.GET)
+//    public List<Transfer> userList() {
+//        List<Transfer> transfers = userDao.getUsers();
+//        return users;
+//    }
 
 }
 
