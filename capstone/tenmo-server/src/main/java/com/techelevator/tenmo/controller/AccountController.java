@@ -39,7 +39,5 @@ public class AccountController {
         List<User> users = userDao.getUsers();
         return users;
     }
-
-
 }
 

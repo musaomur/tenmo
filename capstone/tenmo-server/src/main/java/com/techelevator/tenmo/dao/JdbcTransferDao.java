@@ -1,22 +1,28 @@
 package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Transfer;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
+import java.math.BigDecimal;
+import java.text.Bidi;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 @Component
 public class JdbcTransferDao implements TransferDao {
     private final JdbcTemplate jdbcTemplate;
     //private static AuthenticatedUser currentUser;
+    private final AccountDao accountDao;
 
 
-    public JdbcTransferDao(JdbcTemplate jdbcTemplate) {
+    public JdbcTransferDao(JdbcTemplate jdbcTemplate, AccountDao accountDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.accountDao = accountDao;
     }
 
     @Override
@@ -31,7 +37,20 @@ public class JdbcTransferDao implements TransferDao {
     }
 
     @Override
-    public void transferFunds() {
+    public void transferFunds(Transfer transfer) {
+        int accountFrom = getAccountFromId(transfer.getAccountFrom());
+        int accountTo = getAccountFromId(transfer.getAccountTo());
+        BigDecimal balanceFrom = accountDao.getBalanceByUserId(transfer.getAccountFrom());
+        BigDecimal balanceTo = accountDao.getBalanceByUserId(transfer.getAccountTo());
+        BigDecimal transferAmount = transfer.getAmount();
+        if (accountFrom == accountTo) {
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "YOUR TRANSFER CANNOT BE COMPLETED");
+        }
+        if (transferAmount.compareTo(balanceFrom) > 0 || transferAmount.compareTo(BigDecimal.valueOf(0)) <= 0 ) {
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED,"YOUR TRANSFER CANNOT BE COMPLETED") ;
+        } else {
+
+        }
 
     }
 
@@ -76,4 +95,11 @@ public class JdbcTransferDao implements TransferDao {
         transfer.setAmount(rs.getBigDecimal("amount"));
         return transfer;
     }
+
+    private int getAccountFromId(int userId) {
+        String sql = "SELECT account_id FROM account WHERE user_id = ?";
+        int accountId = jdbcTemplate.queryForObject(sql, int.class, userId);
+        return accountId;
+    }
+
 }
