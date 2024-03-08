@@ -1,10 +1,8 @@
 package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.User;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +31,6 @@ public class JdbcTransferDao implements TransferDao {
     }
 
     @Override
-
-
     public void transferFunds() {
 
     }
@@ -47,7 +43,6 @@ public class JdbcTransferDao implements TransferDao {
                 "JOIN account AS a1 ON a1.account_id = t.account_from " +
                 "JOIN account AS a2 ON a2.account_id = t.account_to " +
                 "WHERE a1.user_id = ? OR a2.user_id = ?";
-7
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, userId);
         while (results.next()) {
@@ -89,11 +84,11 @@ public class JdbcTransferDao implements TransferDao {
 
     private Transfer map(SqlRowSet rs) {
         Transfer transfer = new Transfer();
-        transfer.setTransfer_id(rs.getInt("transfer_id"));
-        transfer.setTransfer_type_id(rs.getInt("transfer_type_id"));
-        transfer.setTransfer_status_id(rs.getInt("transfer_status_id"));
-        transfer.setAccount_from(rs.getInt("account_from"));
-        transfer.setAccount_to(rs.getInt("account_to"));
+        transfer.setTransferId(rs.getInt("transfer_id"));
+        transfer.setTransferTypeId(rs.getInt("transfer_type_id"));
+        transfer.setTransferStatusId(rs.getInt("transfer_status_id"));
+        transfer.setAccountFrom(rs.getInt("account_from"));
+        transfer.setAccountTo(rs.getInt("account_to"));
         transfer.setAmount(rs.getBigDecimal("amount"));
         return transfer;
     }
