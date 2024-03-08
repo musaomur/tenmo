@@ -33,7 +33,7 @@ public class JdbcTransferDao implements TransferDao {
         if(account_from == account_to){
             return "You can not send money yourself";
         }
-        if((amount.compareTo(amount)) && (amount.compareTo(BigDecimal))){
+        if((amount.compareTo()) && (amount.compareTo(BigDecimal))){
 
         }
 
