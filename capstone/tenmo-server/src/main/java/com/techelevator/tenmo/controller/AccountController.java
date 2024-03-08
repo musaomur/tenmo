@@ -38,11 +38,7 @@ public class AccountController {
         List<User> users = userDao.getUsers();
         return users;
     }
-//    @RequestMapping(path = "/tenmo_user", method = RequestMethod.GET)
-//    public List<Transfer> userList() {
-//        List<Transfer> transfers = userDao.getUsers();
-//        return users;
-//    }
+
 
 }
 

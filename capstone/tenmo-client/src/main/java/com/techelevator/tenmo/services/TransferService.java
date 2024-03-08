@@ -15,41 +15,7 @@ public class TransferService {
     private static final RestTemplate restTemplate = new RestTemplate();
     private static AuthenticatedUser currentUser;
 
-    public TransferService() {
-
-    }
+    public TransferService() { }
 }
 
-//
-//public class AccountService {
-//
-//    private static String BASE_URL = "http://localhost:8080";
-//    private static final RestTemplate restTemplate = new RestTemplate();
-//    private static AuthenticatedUser currentUser;
-//
-//
-//    public AccountService(String BASE_URL, AuthenticatedUser currentUser) {
-//        this.BASE_URL = BASE_URL;
-//        this.currentUser = currentUser;
-//    }
-//
-//    public static BigDecimal getBalance(int id) {
-//        return restTemplate.getForObject(BASE_URL + "/account/" + id, BigDecimal.class);
-//    }
-//
-//    public static List<User> getUsers() {
-//        ResponseEntity<List<User>> responseEntity = restTemplate.exchange(BASE_URL + "/tenmo_user/",
-//                HttpMethod.GET, null,
-//                new ParameterizedTypeReference<List<User>>() {
-//                }
-//        );
-//        List<User> users = responseEntity.getBody();
-//        for (User user : users) {
-//            if (user.getId() == currentUser.getUser().getId()) {
-//            } else
-//                System.out.println(user.getId() + " || " + user.getUsername());
-//        }
-//        return users;
-//    }
-//}
 
