@@ -49,10 +49,10 @@ public class TransferController {
         Transfer transfer = transferDao.getById(id);
         return transfer;
     }
-
-    public String doTransfer(@RequestBody Transfer transfer) {
+    @PostMapping()
+    public Transfer doTransfer(@RequestBody Transfer transfer) {
         transferDao.transferFunds();
-        String response = "GOOD FUCKING JOB";
-        return response;
+
+        Transfer newTransfer =
     }
 }
