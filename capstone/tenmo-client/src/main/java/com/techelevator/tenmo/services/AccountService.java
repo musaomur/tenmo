@@ -3,6 +3,8 @@ package com.techelevator.tenmo.services;
 import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.User;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -16,16 +18,18 @@ public class AccountService {
 
     private static String BASE_URL = "http://localhost:8080";
     private static final RestTemplate restTemplate = new RestTemplate();
-    private static AuthenticatedUser currentUser;
 
-
-    public AccountService(String BASE_URL, AuthenticatedUser currentUser) {
-        this.BASE_URL = BASE_URL;
+    public void setCurrentUser(AuthenticatedUser currentUser) {
         this.currentUser = currentUser;
     }
 
-    public static BigDecimal getBalance(int id) {
-        return restTemplate.getForObject(BASE_URL + "/account/" + id, BigDecimal.class);
+    private AuthenticatedUser currentUser;
+
+    public BigDecimal getBalance(int id) {
+        ResponseEntity<BigDecimal> response =
+                restTemplate.exchange(BASE_URL + "/account", HttpMethod.GET, makeAuthEntity(), BigDecimal.class);
+//        return restTemplate.getForObject(BASE_URL + "/account", BigDecimal.class);
+        return response.getBody();
     }
 
     public static List<User> getUsers() {
@@ -35,12 +39,18 @@ public class AccountService {
                 }
         );
         List<User> users = responseEntity.getBody();
-        for (User user : users) {
-            if (user.getId() == currentUser.getUser().getId()) {
-            } else
-                System.out.println(user.getId() + " || " + user.getUsername());
-        }
+//        for (User user : users) {
+//            if (user.getId() == currentUser.getUser().getId()) {
+//            } else
+//                System.out.println(user.getId() + " || " + user.getUsername());
+//        }
         return users;
+    }
+
+    private HttpEntity<Void> makeAuthEntity() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(currentUser.getToken());
+        return new HttpEntity<>(headers);
     }
 }
 

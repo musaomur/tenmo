@@ -17,6 +17,8 @@ public class App {
     private static final String API_BASE_URL = "http://localhost:8080/";
 
     private final ConsoleService consoleService = new ConsoleService();
+
+    private final AccountService accountService = new AccountService();
     private final AuthenticationService authenticationService = new AuthenticationService(API_BASE_URL);
 
     private AuthenticatedUser currentUser;
@@ -33,6 +35,7 @@ public class App {
             mainMenu();
         }
     }
+
     private void loginMenu() {
         int menuSelection = -1;
         while (menuSelection != 0 && currentUser == null) {
@@ -64,6 +67,8 @@ public class App {
         currentUser = authenticationService.login(credentials);
         if (currentUser == null) {
             consoleService.printErrorMessage();
+        } else {
+            accountService.setCurrentUser(currentUser);
         }
     }
 
@@ -91,34 +96,34 @@ public class App {
         }
     }
 
-	private void viewCurrentBalance() {
-        BigDecimal balance = AccountService.getBalance(currentUser.getUser().getId());
+    private void viewCurrentBalance() {
+        BigDecimal balance = accountService.getBalance(currentUser.getUser().getId());
         System.out.println("Your current balance is: $" + balance);
-	}
+    }
 
-	private void viewTransferHistory() {
-		// TODO Auto-generated method stub
-		
-	}
+    private void viewTransferHistory() {
+        // TODO Auto-generated method stub
 
-	private void viewPendingRequests() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	private void sendBucks() {
-        AccountService accountService = new AccountService(API_BASE_URL, currentUser);
+    private void viewPendingRequests() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void sendBucks() {
+//        AccountService accountService = new AccountService(API_BASE_URL, currentUser);
         consoleService.printTransferUsers();
         AccountService.getUsers();
 //        List<User> userList = AccountService.getUsers();
 //        System.out.println("Which user would you like to send money to?");
 //        System.out.println(userList);
-		
-	}
 
-	private void requestBucks() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
+
+    private void requestBucks() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

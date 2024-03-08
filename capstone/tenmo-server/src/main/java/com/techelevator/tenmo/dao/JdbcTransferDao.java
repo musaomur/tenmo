@@ -64,23 +64,7 @@ public class JdbcTransferDao implements TransferDao {
         }
         return null;
     }
-//    @Override
-//    public String transferFunds(int account_from, int account_to, BigDecimal amount){
-//        if(account_from == account_to){
-//            return "You can not send money yourself";
-//        }
-//        if((amount.compareTo(amount)) && (amount.compareTo(BigDecimal))){
-//
-//        }
-//
-//        BigDecimal updatedBalance = new BigDecimal(0);
-//        //BigDecimal amount = Transfer.
-//        String sqlSend = "SELECT balance - amount FROM account WHERE user_id = " + ;
-//        SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSend);
-//        //String sqlRetrieved = "SELECT balance + ? FROM account WHERE user_id = ?";
-//        updatedBalance = result.getBigDecimal();
-//        //return updatedBalance;
-//    }
+
 
     private Transfer map(SqlRowSet rs) {
         Transfer transfer = new Transfer();

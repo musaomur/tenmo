@@ -80,18 +80,3 @@ public class Transfer {
         this.newBalance = newBalance;
     }
 }
-
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, username, password, activated, authorities);
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", username='" + username + '\'' +
-//                ", activated=" + activated +
-//                ", authorities=" + authorities +
-//                '}';
-//    }
