@@ -33,6 +33,7 @@ public class AccountController {
         return balance;
     }
 
+    @PreAuthorize("permitAll()")
     @RequestMapping(path = "/tenmo_user", method = RequestMethod.GET)
     public List<User> userList() {
         List<User> users = userDao.getUsers();

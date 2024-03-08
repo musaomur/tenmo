@@ -32,18 +32,19 @@ public class AccountService {
         return response.getBody();
     }
 
-    public static List<User> getUsers() {
+
+    public  List<User> getUsers() {
         ResponseEntity<List<User>> responseEntity = restTemplate.exchange(BASE_URL + "/tenmo_user/",
                 HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<User>>() {
                 }
         );
         List<User> users = responseEntity.getBody();
-//        for (User user : users) {
-//            if (user.getId() == currentUser.getUser().getId()) {
-//            } else
-//                System.out.println(user.getId() + " || " + user.getUsername());
-//        }
+        for (User user : users) {
+            if (user.getId() == currentUser.getUser().getId()) {
+            } else
+                System.out.println(user.getId() + " || " + user.getUsername());
+        }
         return users;
     }
 
