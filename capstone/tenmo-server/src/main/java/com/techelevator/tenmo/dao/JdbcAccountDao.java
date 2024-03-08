@@ -27,6 +27,22 @@ public class JdbcAccountDao implements AccountDao {
         }
         return balance;
     }
+    private Account findAccountById(int id) {
+        Account account = null;
+        
+    }
+
+    public Account getAccountById(int id) {
+        Account account = null;
+        String sql = "SELECT * FROM account WHERE account_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        if(results.next()) {
+            account
+        }
+    }
+    public BigDecimal addToBalance(BigDecimal amountToAdd, int id) {
+        Account account =
+    }
 
 
 

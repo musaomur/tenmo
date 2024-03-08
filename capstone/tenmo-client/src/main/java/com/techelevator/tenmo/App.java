@@ -115,6 +115,8 @@ public class App {
 //        AccountService accountService = new AccountService(API_BASE_URL, currentUser);
         consoleService.printTransferUsers();
         accountService.getUsers();
+        System.out.println("Select user to send money to: ");
+
 //        List<User> userList = AccountService.getUsers();
 //        System.out.println("Which user would you like to send money to?");
 //        System.out.println(userList);
