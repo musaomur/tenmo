@@ -21,6 +21,7 @@ public class JdbcTransferDao implements TransferDao {
 
 
 
+
     public JdbcTransferDao(JdbcTemplate jdbcTemplate, AccountDao accountDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.accountDao = accountDao;
@@ -42,7 +43,7 @@ public class JdbcTransferDao implements TransferDao {
 
     }
 
-    private Account getAccountFromId(int userId) {
+    public Account getAccountFromId(int userId) {
         Account account = null;
         String sql = "SELECT * FROM accounts WHERE account_id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -64,7 +65,9 @@ public class JdbcTransferDao implements TransferDao {
         if (transferAmount.compareTo(balanceFrom) > 0 || transferAmount.compareTo(BigDecimal.valueOf(0)) <= 0 ) {
             throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED,"YOUR TRANSFER CANNOT BE COMPLETED") ;
         } else {
-
+            accountDao.addBalance(transferAmount, accountTo.getAccountId());
+            accountDao.subtractBalance(transferAmount, accountFrom.getAccountId());
+            System.out.println();
         }
 
     }

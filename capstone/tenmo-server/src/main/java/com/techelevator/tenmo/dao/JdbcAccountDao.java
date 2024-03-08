@@ -40,7 +40,7 @@ public class JdbcAccountDao implements AccountDao {
         return account;
     }
 
-    private Account mapRowToAccount(SqlRowSet result) {
+    public Account mapRowToAccount(SqlRowSet result) {
         Account account = new Account();
         account.setBalance(result.getBigDecimal("balance"));
         account.setAccountId(result.getInt("account_id"));

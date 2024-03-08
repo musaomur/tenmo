@@ -3,6 +3,7 @@ package com.techelevator.tenmo.controller;
 import com.techelevator.tenmo.dao.AccountDao;
 import com.techelevator.tenmo.dao.TransferDao;
 import com.techelevator.tenmo.dao.UserDao;
+import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.Transfer;
 
 import java.security.Principal;
@@ -47,5 +48,11 @@ public class TransferController {
     public Transfer getTransfer(@PathVariable int id) {
         Transfer transfer = transferDao.getById(id);
         return transfer;
+    }
+
+    public String doTransfer(@RequestBody Transfer transfer) {
+        transferDao.transferFunds();
+        String response = "GOOD FUCKING JOB";
+        return response;
     }
 }

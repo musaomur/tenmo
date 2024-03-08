@@ -9,6 +9,8 @@ public interface TransferDao {
 
     void transferFunds();
 
+    void transferFunds(Transfer transfer);
+
     List<Transfer> getAllByUserId(int userId);
 
     Transfer getById(int id);
