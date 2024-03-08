@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
-@RequestMapping("transfers")
+@RequestMapping("transfer")
 public class TransferController {
     private final AccountDao accountDao;
     private final TransferDao transferDao;
@@ -50,9 +50,9 @@ public class TransferController {
         return transfer;
     }
     @PostMapping()
-    public Transfer doTransfer(@RequestBody Transfer transfer) {
-        transferDao.transferFunds();
-
-        Transfer newTransfer =
+    public String doTransfer(@RequestBody Transfer transfer) {
+//        Transfer newTransfer = new Transfer();
+        String theTransfer = transferDao.transferFunds(transfer);
+        return theTransfer;
     }
 }

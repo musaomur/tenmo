@@ -113,10 +113,13 @@ public class App {
 
     private void sendBucks() {
 //        AccountService accountService = new AccountService(API_BASE_URL, currentUser);
-        System.out.println("Select user to send money to: ");
+
         consoleService.printTransferUsers();
         accountService.getUsers();
         System.out.println("-----------------------------");
+        System.out.println("Select ID of user to send money to: ");
+        TransferService transferService = new TransferService();
+
 
 
 //        List<User> userList = AccountService.getUsers();

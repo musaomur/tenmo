@@ -38,10 +38,10 @@ public class JdbcTransferDao implements TransferDao {
         return userList;
     }
 
-    @Override
-    public void transferFunds() {
-
-    }
+//    @Override
+//    public void transferFunds() {
+//
+//    }
 
     public Account getAccountFromId(int userId) {
         Account account = null;
@@ -53,7 +53,7 @@ public class JdbcTransferDao implements TransferDao {
         return account;
     }
     @Override
-    public void transferFunds(Transfer transfer) {
+    public String transferFunds(Transfer transfer) {
          Account accountFrom = getAccountFromId(transfer.getAccountFrom());
         Account accountTo = getAccountFromId(transfer.getAccountTo());
         BigDecimal balanceFrom = accountDao.getBalanceByUserId(transfer.getAccountFrom());
@@ -67,7 +67,7 @@ public class JdbcTransferDao implements TransferDao {
         } else {
             accountDao.addBalance(transferAmount, accountTo.getAccountId());
             accountDao.subtractBalance(transferAmount, accountFrom.getAccountId());
-            System.out.println();
+            return "transfer complete";
         }
 
     }
