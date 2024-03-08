@@ -5,10 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.math.BigDecimal;
-import java.text.Bidi;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.techelevator.tenmo.model.Account;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,6 +17,8 @@ public class JdbcTransferDao implements TransferDao {
     private final JdbcTemplate jdbcTemplate;
     //private static AuthenticatedUser currentUser;
     private final AccountDao accountDao;
+
+
 
 
     public JdbcTransferDao(JdbcTemplate jdbcTemplate, AccountDao accountDao) {
@@ -37,9 +38,23 @@ public class JdbcTransferDao implements TransferDao {
     }
 
     @Override
+    public void transferFunds() {
+
+    }
+
+    private Account getAccountFromId(int userId) {
+        Account account = null;
+        String sql = "SELECT * FROM accounts WHERE account_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if (results.next()) {
+            account = accountDao.mapRowToAccount(results);
+        }
+        return account;
+    }
+    @Override
     public void transferFunds(Transfer transfer) {
-        int accountFrom = getAccountFromId(transfer.getAccountFrom());
-        int accountTo = getAccountFromId(transfer.getAccountTo());
+         Account accountFrom = getAccountFromId(transfer.getAccountFrom());
+        Account accountTo = getAccountFromId(transfer.getAccountTo());
         BigDecimal balanceFrom = accountDao.getBalanceByUserId(transfer.getAccountFrom());
         BigDecimal balanceTo = accountDao.getBalanceByUserId(transfer.getAccountTo());
         BigDecimal transferAmount = transfer.getAmount();
@@ -96,10 +111,6 @@ public class JdbcTransferDao implements TransferDao {
         return transfer;
     }
 
-    private int getAccountFromId(int userId) {
-        String sql = "SELECT account_id FROM account WHERE user_id = ?";
-        int accountId = jdbcTemplate.queryForObject(sql, int.class, userId);
-        return accountId;
-    }
+
 
 }

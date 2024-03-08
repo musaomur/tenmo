@@ -23,6 +23,16 @@ public class Account {
         return balance;
     }
 
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public int getAccountId() {
         return accountId;
     }
