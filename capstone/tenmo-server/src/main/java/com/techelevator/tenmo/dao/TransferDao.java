@@ -7,9 +7,9 @@ import java.util.List;
 public interface TransferDao {
     List<String> getUserList();
 
-    void transferFunds();
+    //void transferFunds();
 
-    void transferFunds(Transfer transfer);
+    String transferFunds(Transfer transfer);
 
     List<Transfer> getAllByUserId(int userId);
 
